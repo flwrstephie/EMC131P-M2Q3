@@ -100,8 +100,9 @@ class GameScene extends Phaser.Scene {
     
         this.cameras.main.startFollow(this.player);
         this.cameras.main.followOffset.set(0, 40);
-        this.cameras.main.setZoom(1.5);
+        this.cameras.main.setZoom(1);
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        this.cameras.main.roundPixels = true;
     
         this.anims.create({
             key: 'spin',
@@ -110,7 +111,7 @@ class GameScene extends Phaser.Scene {
             repeat: -1
         });
     
-        this.scoreText = this.add.text(170, 100, 'Score: 0', { 
+        this.scoreText = this.add.text(20, 20, 'Score: 0', { 
             fontSize: '25px',
             fontFamily: 'Fatpix',
             fill: '#fde6ee',
@@ -118,7 +119,7 @@ class GameScene extends Phaser.Scene {
             strokeThickness: 4
         });
     
-        this.daisiesCollectedText = this.add.text(220, 150, 'x 0', { 
+        this.daisiesCollectedText = this.add.text(60, 55, 'x 0', { 
             fontSize: '25px',
             fontFamily: 'Fatpix',
             fill: '#fde6ee',
@@ -131,7 +132,7 @@ class GameScene extends Phaser.Scene {
         this.scoreText.setScrollFactor(0);
         this.daisiesCollectedText.setScrollFactor(0);
     
-        const daisyIcon = this.add.sprite(190, 160, 'daisy').play('spin');
+        const daisyIcon = this.add.sprite(35, 70, 'daisy').play('spin');
         daisyIcon.setScale(1.5);
         daisyIcon.setDepth(100);
         daisyIcon.setScrollFactor(0);

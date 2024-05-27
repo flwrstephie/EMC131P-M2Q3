@@ -7,6 +7,7 @@ let config = {
     type: Phaser.AUTO,
     width: 960,
     height: 540,
+    pixelArt: true,   
     scene: [MainMenuScene, GameScene, GameOverScene, WinScene],
     physics: {
         default: 'arcade',
