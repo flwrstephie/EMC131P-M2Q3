@@ -6,12 +6,16 @@ class MainMenuScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('theme', './assets/audio/bgm.mp3');
         this.load.image('clouds', './assets/sprites/clouds.png'); 
+        this.load.audio('menuTheme', './assets/audio/bgm/menu.mp3');
     }
 
     create() {
-        
+        this.sound.stopAll(); 
+
+        this.backgroundMusic = this.sound.add('menuTheme', { loop: true });
+        this.backgroundMusic.play();
+
         this.cameras.main.setBackgroundColor('#88a1d7'); 
         const clouds = this.add.tileSprite(0, 0, 960, 540, 'clouds').setOrigin(0);
         clouds.setScrollFactor(0); 
@@ -114,6 +118,42 @@ class MainMenuScene extends Phaser.Scene {
         button.on('pointerout', () => {
             button.setScale(1);
         });
+    }
+
+    pauseScene() {
+        if (this.backgroundMusic && this.backgroundMusic.isPlaying) {
+            this.backgroundMusic.pause();
+        }
+    }
+
+    resumeScene() {
+        if (this.backgroundMusic && !this.backgroundMusic.isPlaying) {
+            this.backgroundMusic.resume();
+        }
+    }
+
+    hideScene() {
+        if (this.backgroundMusic && this.backgroundMusic.isPlaying) {
+            this.backgroundMusic.pause();
+        }
+    }
+
+    showScene() {
+        if (this.backgroundMusic && !this.backgroundMusic.isPlaying) {
+            this.backgroundMusic.resume();
+        }
+    }
+
+    shutdown() {
+        if (this.backgroundMusic) {
+            this.backgroundMusic.stop();
+        }
+    }
+
+    shutdown() {
+        if (this.backgroundMusic) {
+            this.backgroundMusic.stop();
+        }
     }
 }
 

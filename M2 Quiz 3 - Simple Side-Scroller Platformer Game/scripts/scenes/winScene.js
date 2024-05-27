@@ -7,6 +7,7 @@ class WinScene extends Phaser.Scene {
 
     preload() {
         this.load.image('clouds', './assets/sprites/clouds.png'); 
+        this.load.audio('victory', './assets/audio/sfx/victory.mp3');
     }
 
     init(data) {
@@ -15,6 +16,11 @@ class WinScene extends Phaser.Scene {
     }
 
     create() {
+        this.sound.stopAll(); 
+
+        const victorySouond = this.sound.add('victory');
+        victorySouond.play();
+
         this.cameras.main.setBackgroundColor('#88a1d7'); 
         const clouds = this.add.tileSprite(0, 0, 960, 540, 'clouds').setOrigin(0);
         clouds.setScrollFactor(0); 
@@ -30,32 +36,32 @@ class WinScene extends Phaser.Scene {
         this.add.text(480, 100, 'GREAT JOB!', {
             fontSize: '90px',
             fontFamily: 'Fatpix',
-            fill: '#ffdcd0',
-            stroke: '#b74749',
+            fill: '#fde6ee',
+            stroke: '#e17c80',
             strokeThickness: 6
         }).setOrigin(0.5);
 
         this.add.text(480, 200, 'Score: ' + this.score, {
             fontSize: '35px',
             fontFamily: 'Fatpix',
-            fill: '#ffdcd0',
-            stroke: '#b74749',
+            fill: '#fde6ee',
+            stroke: '#e17c80',
             strokeThickness: 6
         }).setOrigin(0.5);
 
         this.add.text(480, 250, 'Flowers Collected: ' + this.daisiesCollected, {
             fontSize: '35px',
             fontFamily: 'Fatpix',
-            fill: '#ffdcd0',
-            stroke: '#b74749',
+            fill: '#fde6ee',
+            stroke: '#e17c80',
             strokeThickness: 6
         }).setOrigin(0.5);
 
         let restartButton = this.add.text(350, 450, 'RETRY', {
             fontSize: '25px',
             fontFamily: 'Fatpix',
-            fill: '#ffdcd0',
-            stroke: '#b74749',
+            fill: '#fde6ee',
+            stroke: '#e17c80',
             strokeThickness: 6
         }).setOrigin(0.5);
 
@@ -67,8 +73,8 @@ class WinScene extends Phaser.Scene {
         let quitButton = this.add.text(620, 450, 'HOME', {
             fontSize: '25px',
             fontFamily: 'Fatpix',
-            fill: '#ffdcd0',
-            stroke: '#b74749',
+            fill: '#fde6ee',
+            stroke: '#e17c80',
             strokeThickness: 6
         }).setOrigin(0.5);
 

@@ -9,8 +9,6 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('sky', './assets/sprites/sky.png');
-        this.load.image('ground', './assets/sprites/ground.png'); 
         this.load.image('clouds', './assets/sprites/clouds.png'); 
         this.load.image('goal', './assets/sprites/goal.png');
 
@@ -24,11 +22,11 @@ class GameScene extends Phaser.Scene {
 
         this.load.audio('theme', './assets/audio/bgm/game.mp3');
         this.load.audio('collectFlower', './assets/audio/sfx/daisyCollect.wav')
-        
-        
     }
 
     create() {
+        this.sound.stopAll(); 
+
         this.score = 0;
         this.daisiesCollected = 0;
         this.cameras.main.setBackgroundColor('#88a1d7'); 
@@ -187,9 +185,15 @@ class GameScene extends Phaser.Scene {
             loop: false
         });
 
-        this.collectFlowerSound = this.sound.add('collectFlower');
         this.backgroundMusic = this.sound.add('theme', { loop: true });
         this.backgroundMusic.play();
+
+        this.collectFlowerSound = this.sound.add('collectFlower');
+
+        this.events.on('pause', this.pauseScene, this);
+        this.events.on('resume', this.resumeScene, this);
+        this.events.on('hide', this.hideScene, this);
+        this.events.on('show', this.showScene, this);
     }
     
     update() {
@@ -254,12 +258,34 @@ class GameScene extends Phaser.Scene {
         this.scene.restart();
     }
 
+    pauseScene() {
+        if (this.backgroundMusic && this.backgroundMusic.isPlaying) {
+            this.backgroundMusic.pause();
+        }
+    }
+
+    resumeScene() {
+        if (this.backgroundMusic && !this.backgroundMusic.isPlaying) {
+            this.backgroundMusic.resume();
+        }
+    }
+
+    hideScene() {
+        if (this.backgroundMusic && this.backgroundMusic.isPlaying) {
+            this.backgroundMusic.pause();
+        }
+    }
+
+    showScene() {
+        if (this.backgroundMusic && !this.backgroundMusic.isPlaying) {
+            this.backgroundMusic.resume();
+        }
+    }
+
     shutdown() {
         if (this.backgroundMusic) {
             this.backgroundMusic.stop();
         }
-
-        
     }
 }
 export default GameScene;
