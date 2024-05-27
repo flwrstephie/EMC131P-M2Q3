@@ -168,7 +168,7 @@ class GameScene extends Phaser.Scene {
     
         this.physics.add.overlap(this.player, goal, this.checkGoal, null, this);
     
-        this.notEnoughText = this.add.text(4950, 420, 'Not enough daisies!', {
+        this.notEnoughText = this.add.text(4925, 350, 'Not enough daisies!', {
             fontSize: '25px',
             fontFamily: 'Fatpix',
             fill: '#fde6ee',
